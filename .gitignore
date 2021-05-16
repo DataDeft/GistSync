@@ -1,0 +1,23 @@
+**/.fake
+**/.ionide
+**/obj/
+**/bin/
+**/package-lock.json
+**/node_modules/
+**/rsa_private.pem
+**/prod-data/
+**/index/
+
+**/_*
+
+**/env.json
+**/serverless.yml
+
+.fake
+.ionide
+
+## Visual Studio stuff
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
