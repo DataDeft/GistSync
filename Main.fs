@@ -89,7 +89,8 @@ module Main =
 
   let help () =
 
-    logger <| Figgle.FiggleFonts.Isometric1.Render("GistSync Help")
+    logger <| Figgle.FiggleFonts.Slant.Render(" GistSync")
+    logger <| sprintf "The following commands are available:"
     logger <| sprintf "--command sync --local-path gists/"
     logger <| sprintf "--command search --local-path gists/ --pattern ping"
     logger <| sprintf "--command help"

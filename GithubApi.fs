@@ -174,10 +174,7 @@ module GithubApi =
 
 
   let isFolder p =
-    try
-      File.GetAttributes(p).HasFlag(FileAttributes.Directory)
-    with ex ->
-      false
+    Directory.Exists(p)
 
 
   let writeToDisk token (localPath) (g:Gist) =
@@ -193,13 +190,10 @@ module GithubApi =
           let folder = Path.Combine(localPath, id)
 
           match (isFolder folder) with
-
           | true ->
-            logger <| sprintf "Folder already created"
             downloadAndSave token folder f
 
           | false ->
-            logger <| sprintf "Folder nix created yet"
             let dir = Directory.CreateDirectory(folder)
             downloadAndSave token folder f
         )
@@ -209,6 +203,9 @@ module GithubApi =
 
   let processChunk token (localPath:string) body =
     getBodyParts body
+
+    // TODO Add async parallel
+
     |> Option.map
       (fun xs ->
         (Seq.iter (writeToDisk token localPath) xs))
