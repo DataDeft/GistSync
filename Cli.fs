@@ -8,7 +8,8 @@ namespace DataDeft.GistSync
 open System
 open System.IO
 
-type ValidCommand = Sync | List
+
+type ValidCommand = Sync | List | Help
 
 
 [<StructuredFormatDisplay("LocalPath: {LocalPath} :: Command: {Command}" )>]
@@ -18,7 +19,9 @@ type CommandLineOptions =
     Command: ValidCommand
   }
 
+
 module Cli =
+
 
   let logger (s:string) =
     System.Console.WriteLine s
@@ -42,8 +45,8 @@ module Cli =
     match c with
     | "sync"  -> Ok Sync
     | "list"  -> Ok List
+    | "help"  -> Ok Help
     | any     -> Error (InvalidCommand any)
-
 
 
   let rec private parseCommandLineRec args optionsSoFar =
@@ -54,7 +57,6 @@ module Cli =
     //
 
     | [] ->
-      logger <| sprintf "optionsSoFar %A" optionsSoFar
       optionsSoFar
 
     //
@@ -96,6 +98,16 @@ module Cli =
             logger <| sprintf "command cannot be empty"
             Environment.Exit 1
             parseCommandLineRec xs optionsSoFar // never reach
+
+    //
+    // Help
+    //
+
+
+    | "--help" :: xs ->
+
+      parseCommandLineRec [] { optionsSoFar with Command = Help }
+
 
     //
     // Unknown args

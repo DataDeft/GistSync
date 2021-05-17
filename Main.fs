@@ -87,17 +87,21 @@ module Main =
 
     ()
 
+  let help () =
+
+    logger <| Figgle.FiggleFonts.Isometric1.Render("GistSync Help")
+    logger <| sprintf "--command sync --local-path gists/"
+    logger <| sprintf "--command search --local-path gists/ --pattern ping"
+    logger <| sprintf "--command help"
+
 
   [<EntryPoint>]
   let main args =
 
     let commandLineArgumentsParsed = Cli.parseCommandLine (Array.toList args)
 
-    logger
-    <| sprintf "%A" commandLineArgumentsParsed
-
     match commandLineArgumentsParsed.Command with
     | Sync -> syncGists commandLineArgumentsParsed.LocalPath
     | List -> listGists commandLineArgumentsParsed.LocalPath
-
+    | Help -> help ()
     0
