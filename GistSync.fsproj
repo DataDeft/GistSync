@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>GistSync</AssemblyName>
     <RootNamespace>DataDeft.GistSync</RootNamespace>
-    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
